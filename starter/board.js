@@ -142,10 +142,10 @@ class Board {
   }
 }
 
-const newBoardState = new Board(4, 3, 3);
+// const newBoardState = new Board(4, 3, 3);
 // console.log(newBoardState.grid)
-console.log(newBoardState.display());
-console.log(newBoardState.isGameOver());
+// console.log(newBoardState.display());
+// console.log(newBoardState.isGameOver());
 // console.log(newBoardState.grid[5][4] === undefined)
 // console.log(newBoardState.randomShips(12));
 
