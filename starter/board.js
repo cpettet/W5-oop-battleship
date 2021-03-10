@@ -45,9 +45,8 @@ class Board {
   }
 
   randomShips(totalSpaces) {
-    const shipLocations = [];
+    let shipLocations = [];
     let countObj = {};
-    console.log('numShips',this.numShips);
     for (let i = 0; i < this.numShips; i++) {
       shipLocations.push( Math.floor(Math.random() * Math.floor(totalSpaces)) );
     }
@@ -56,14 +55,26 @@ class Board {
     // key is string version of number
     // if any of the values is > 1, then call randomShips again
 
+    // console.log(shipLocations)
     shipLocations.forEach( location => {
-      if (countObj[location.toString()] === )
+      // console.log(countObj[location.toString()])
+      if (countObj[location.toString()] === undefined) {
+        countObj[location.toString()] = 1;
+        // console.log(countObj);
+      } else {
+        countObj[location.toString()]++;
+        // console.log('existing key', countObj);
+      }
     });
+    console.log(countObj);
 
+    for (let key in countObj) {
+      if (countObj[key] > 1) {
+        console.log('duplicate values!', shipLocations);
+        shipLocations = this.randomShips(totalSpaces);
+      }
+    }
     return shipLocations;
-
-
-
   }
 
   display() {
@@ -93,7 +104,7 @@ class Board {
 }
 
 const newBoardState = new Board(4, 3, 3);
-console.log(newBoardState.grid)
+// console.log(newBoardState.grid)
 console.log(newBoardState.randomShips(12));
 
 module.exports = Board;
