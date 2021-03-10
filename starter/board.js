@@ -1,13 +1,42 @@
 class Board {
-  constructor() {
+  constructor(numRows, numCols, numShips) {
     // TODO: Set up constructor that sets the numRos, numCols, and numShips.
     // TODO: Set this.grid equal to the return value of the instance method
     // populateGrid().
+    this.numRows = numRows;
+    this.numCols = numCols;
+    this.numShips = numShips;
+    this.grid = this.populateGrid();
   }
 
   populateGrid() {
     // TODO: Using the instance variables numRows, numCols, and numShips, return
     // a 2D array representing the state of the board.
+    /*
+    - num S's counter
+    - Math.random() from 0 to total spaces
+      [1, 4, 11]
+      in for loop: if i === a number in array, add an s
+      - add to new array
+      - redo Math.random()
+      - check if in array of ships
+    - entries in array/grid = numRows * numCols
+      - randomly populate board, 
+      - check if new in s array
+      - all spots are null = empty
+      - check grid if 3 ships or not
+    */
+    let grid = [];
+    const totalSpaces = this.numRows * this.numCols;
+    for (let i = 0; i < totalSpaces; i++) {
+      // if s's in grid < numShips && math.random, add s to grid
+      // else, add null
+      grid.push(null);
+    }
+    // Math.floor(Math.random() * Math.floor(max));
+
+    // if numS === numShips, return grid, otherwise call populateGrid again
+    return grid;
   }
 
   display() {
@@ -35,5 +64,8 @@ class Board {
     // space or a damaged ship.
   }
 }
+
+const newBoardState = new Board(4, 3, 1);
+console.log(newBoardState.grid)
 
 module.exports = Board;

@@ -18,13 +18,18 @@ class HumanPlayer {
       //turn answer into an array
       let [row, col] = answer.split(", ")
       processMove([row, col]);
-      this.rl.close();
     })
   }
 
-  processGameOver(isWon) {
+  processGameOver(isWon, turns) {
     // TODO: Display a different message depending on if the player won or lost
     // the game. Close the rl interface.
+    if (isWon) {
+      console.log(`Player has won in ${turns} turns!`)
+    } else {
+      console.log('Player has lost!')
+    }
+    this.rl.close();
   }
 }
 
