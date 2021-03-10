@@ -14,6 +14,9 @@ class Board {
     // a 2D array representing the state of the board.
     /*
     - num S's counter
+
+    // Math.floor(Math.random() * Math.floor(max));
+
     - Math.random() from 0 to total spaces
       [1, 4, 11]
       in for loop: if i === a number in array, add an s
@@ -21,13 +24,15 @@ class Board {
       - redo Math.random()
       - check if in array of ships
     - entries in array/grid = numRows * numCols
-      - randomly populate board, 
+      - randomly populate board,
       - check if new in s array
       - all spots are null = empty
       - check grid if 3 ships or not
     */
     let grid = [];
     const totalSpaces = this.numRows * this.numCols;
+    const shipsArray = this.randomShips(totalSpaces);
+
     for (let i = 0; i < totalSpaces; i++) {
       // if s's in grid < numShips && math.random, add s to grid
       // else, add null
@@ -37,6 +42,28 @@ class Board {
 
     // if numS === numShips, return grid, otherwise call populateGrid again
     return grid;
+  }
+
+  randomShips(totalSpaces) {
+    const shipLocations = [];
+    let countObj = {};
+    console.log('numShips',this.numShips);
+    for (let i = 0; i < this.numShips; i++) {
+      shipLocations.push( Math.floor(Math.random() * Math.floor(totalSpaces)) );
+    }
+    // iterate through ship locations
+    // create an object based on the counts of number of ship locations
+    // key is string version of number
+    // if any of the values is > 1, then call randomShips again
+
+    shipLocations.forEach( location => {
+      if (countObj[location.toString()] === )
+    });
+
+    return shipLocations;
+
+
+
   }
 
   display() {
@@ -65,7 +92,8 @@ class Board {
   }
 }
 
-const newBoardState = new Board(4, 3, 1);
+const newBoardState = new Board(4, 3, 3);
 console.log(newBoardState.grid)
+console.log(newBoardState.randomShips(12));
 
 module.exports = Board;
