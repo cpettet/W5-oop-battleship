@@ -33,14 +33,17 @@ class Board {
     const totalSpaces = this.numRows * this.numCols;
     const shipsArray = this.randomShips(totalSpaces);
 
-    for (let i = 0; i < totalSpaces; i++) {
-      // if s's in grid < numShips && math.random, add s to grid
-      // else, add null
-      grid.push(null);
+    for (let i = 0; i < this.numRows; i++) {
+      grid.push([]);
+      //console.log(grid);
+      for (let j = 0; j < this.numCols; j++) {
+        if (shipsArray.includes( (i*this.numCols+j ))) {grid[i].push('s')}
+        else {
+          grid[i].push(null);
+          //console.log(grid);
+        }
+      }
     }
-    // Math.floor(Math.random() * Math.floor(max));
-
-    // if numS === numShips, return grid, otherwise call populateGrid again
     return grid;
   }
 
@@ -66,11 +69,11 @@ class Board {
         // console.log('existing key', countObj);
       }
     });
-    console.log(countObj);
+    // console.log(countObj);
 
     for (let key in countObj) {
       if (countObj[key] > 1) {
-        console.log('duplicate values!', shipLocations);
+      // console.log('duplicate values!', shipLocations);
         shipLocations = this.randomShips(totalSpaces);
       }
     }
@@ -81,6 +84,11 @@ class Board {
     // TODO: Print the game board with marks on any spaces that have been fired
     // upon. Be sure not to display the unhit ships to the user! Hint: you might
     // be able to use console.table()
+    let columns = [];
+    for (let i = 0; i < this.numCols; i++) {
+      columns.push(i);
+    }
+    console.table(this.grid, columns);
   }
 
   count() {
@@ -105,6 +113,7 @@ class Board {
 
 const newBoardState = new Board(4, 3, 3);
 // console.log(newBoardState.grid)
-console.log(newBoardState.randomShips(12));
+console.log(newBoardState.display());
+// console.log(newBoardState.randomShips(12));
 
 module.exports = Board;
