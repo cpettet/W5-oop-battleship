@@ -93,19 +93,37 @@ class Board {
 
   count() {
     // TODO: Return the number of valid targets (ships) remaining.
+    let shipsRemaining = this.grid.flat().reduce( (sum, space) => {
+      if (space === 's') {
+        return sum += 1;
+      }
+      else {return sum};
+    },0);
+
+    return shipsRemaining;
   }
 
   isValidMove(pos) {
     // TODO: Take in an attack position (in the form of an array [row, col]) and
     // return true if the position is a valid move.
     // compare row to this.numRow & col to this.numCol
-    if (this.grid[row][col] === null) {
-      return true;
-    } else if (true){}
+
+    //if (outside the grid) return false
+    //if (all the valid cases) return true
+    //else false
+
+    const [row, col] = pos;
+
+    if (row > this.numRows || col > this.numCols) {return false}
+
+    if (this.grid[row][col] === null) {return true}
+    else if (this.grid[row][col] === 's') {return true}
+    else {return false}
   }
 
   isGameOver() {
     // TODO: Return true if the game is over (when all ships are hit).
+    return this.count() === 0;
   }
 
   attack(attackArray) {
@@ -113,21 +131,21 @@ class Board {
     // a parameter. Update this.grid depending on if the position is an empty
     // space or a damaged ship.
     const [row, col] = attackArray;
-    if (this.grid[row][col] === null) {
-      this.grid[row][col] = 'x';
-    } else if (this.grid[row][col] === "x" || this.grid[row][col] === "h") {
-      console.log('You shot here already!');
-    } else {
-      this.grid[row][col] = "h";
+    const position = this.grid[row][col];
+    if (this.isValidMove(attackArray) && position === null) {
+      position = 'x';
     }
-    // if s in grid, mark as h
-    // if null in grid, mark as x
+    else if (this.isValidMove(attackArray) && position === 's') {
+      position = 'h';
+    }
+
   }
 }
 
 const newBoardState = new Board(4, 3, 3);
 // console.log(newBoardState.grid)
 console.log(newBoardState.display());
+console.log(newBoardState.isGameOver());
 // console.log(newBoardState.grid[5][4] === undefined)
 // console.log(newBoardState.randomShips(12));
 
