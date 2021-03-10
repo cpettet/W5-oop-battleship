@@ -98,22 +98,37 @@ class Board {
   isValidMove(pos) {
     // TODO: Take in an attack position (in the form of an array [row, col]) and
     // return true if the position is a valid move.
+    // compare row to this.numRow & col to this.numCol
+    if (this.grid[row][col] === null) {
+      return true;
+    } else if (true){}
   }
 
   isGameOver() {
     // TODO: Return true if the game is over (when all ships are hit).
   }
 
-  attack() {
+  attack(attackArray) {
     // TODO: Take in an attack position in the form of an array, [row, col], as
     // a parameter. Update this.grid depending on if the position is an empty
     // space or a damaged ship.
+    const [row, col] = attackArray;
+    if (this.grid[row][col] === null) {
+      this.grid[row][col] = 'x';
+    } else if (this.grid[row][col] === "x" || this.grid[row][col] === "h") {
+      console.log('You shot here already!');
+    } else {
+      this.grid[row][col] = "h";
+    }
+    // if s in grid, mark as h
+    // if null in grid, mark as x
   }
 }
 
 const newBoardState = new Board(4, 3, 3);
 // console.log(newBoardState.grid)
 console.log(newBoardState.display());
+// console.log(newBoardState.grid[5][4] === undefined)
 // console.log(newBoardState.randomShips(12));
 
 module.exports = Board;
