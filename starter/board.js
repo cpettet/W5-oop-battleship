@@ -113,7 +113,7 @@ class Board {
     //else false
 
     const [row, col] = pos;
-
+    console.log('row-col',[row, col]);
     if (row > this.numRows || col > this.numCols) {return false}
 
     if (this.grid[row][col] === null) {return true}
@@ -131,7 +131,7 @@ class Board {
     // a parameter. Update this.grid depending on if the position is an empty
     // space or a damaged ship.
     const [row, col] = attackArray;
-    const position = this.grid[row][col];
+    let position = this.grid[row][col];
     if (this.isValidMove(attackArray) && position === null) {
       position = 'x';
     }

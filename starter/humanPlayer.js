@@ -17,7 +17,7 @@ class HumanPlayer {
     this.rl.question("What is your move? (in the form of: row, col)", (answer) => {
       //turn answer into an array
       let [row, col] = answer.split(", ")
-      processMove([row, col]);
+      processMove([Number(row), Number(col)]);
     })
   }
 
